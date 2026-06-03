@@ -1,567 +1,103 @@
+
 <style>
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    overflow-x: hidden;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
-  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap');
-
-  .page-wrap {
-    min-height: 100vh;
-    background: #0a1a0d;
-    color: #e8f5eb;
-    font-family: 'DM Sans', 'Segoe UI', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 3rem 1rem 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .orb {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .orb-1 {
-    width: 480px;
-    height: 480px;
-    background: radial-gradient(circle, #1a5c2a 0%, transparent 70%);
-    top: -140px;
-    right: -80px;
-    opacity: 0.5;
-    filter: blur(72px);
-  }
-
-  .orb-2 {
-    width: 380px;
-    height: 380px;
-    background: radial-gradient(circle, #0d3d1a 0%, transparent 70%);
-    bottom: -90px;
-    left: -60px;
-    opacity: 0.6;
-    filter: blur(60px);
-  }
-
-  .orb-3 {
-    width: 280px;
-    height: 280px;
-    background: radial-gradient(circle, #2d7a3e 0%, transparent 70%);
-    top: 42%;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0.12;
-    filter: blur(48px);
-  }
-
-  .container {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 460px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
-  /* Confetti canvas */
-  #confetti-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 999;
-  }
-
-  /* Hero badge */
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(61, 202, 106, 0.12);
-    border: 1px solid rgba(61, 202, 106, 0.3);
-    border-radius: 100px;
-    padding: 0.3rem 0.9rem;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: #3dca6a;
-    letter-spacing: 0.04em;
-    animation: fadeUp 0.5s ease both;
-  }
-
-  .badge-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #3dca6a;
-    animation: blink 1.5s infinite;
-  }
-
-  @keyframes blink {
-
-    0%,
-    100% {
-      opacity: 1
-    }
-
-    50% {
-      opacity: 0.3
-    }
-  }
-
-  /* Main card */
-  .main-card {
-    width: 100%;
-    background: linear-gradient(160deg, #0f2e14 0%, #0a1a0d 100%);
-    border: 1px solid rgba(61, 202, 106, 0.25);
-    border-radius: 24px;
-    padding: 2.5rem 2rem 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.2rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    animation: fadeUp 0.6s ease 0.1s both;
-  }
-
-  .main-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #3dca6a 40%, #5ee87e 60%, transparent);
-  }
-
-  /* Avatar ring */
-  .avatar-ring {
-    padding: 3px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #3dca6a, #1a7a3a, #0f4d22);
-  }
-
-  .avatar {
-    width: 92px;
-    height: 92px;
-    border-radius: 50%;
-    background: #1a3d20;
-    border: 3px solid #0a1a0d;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.2rem;
-  }
-
-  /* Checkmark burst */
-  .check-burst {
-    position: absolute;
-    top: -1px;
-    right: -1px;
-    width: 32px;
-    height: 32px;
-    background: linear-gradient(135deg, #3dca6a, #2aae56);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #0a1a0d;
-    font-size: 0.9rem;
-  }
-
-  .avatar-wrap {
-    position: relative;
-  }
-
-  /* Congrats text */
-  .congrats-label {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: #3dca6a;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .main-title {
-    font-size: 1.85rem;
-    font-weight: 700;
-    color: #e8f5eb;
-    letter-spacing: -0.03em;
-    line-height: 1.15;
-  }
-
-  .main-title span {
-    color: #3dca6a;
-  }
-
-  .main-sub {
-    font-size: 0.95rem;
-    color: #8ab898;
-    line-height: 1.7;
-    max-width: 340px;
-  }
-
-  /* Decorative divider */
-  .divider {
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #3dca6a, transparent);
-    border-radius: 2px;
-  }
-
-  /* Info row */
-  .info-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.7rem;
-    width: 100%;
-  }
-
-  .info-item {
-    background: rgba(61, 202, 106, 0.06);
-    border: 1px solid rgba(61, 202, 106, 0.15);
-    border-radius: 14px;
-    padding: 0.85rem 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    text-align: left;
-  }
-
-  .info-label {
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: #4dae65;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .info-value {
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: #dff0e3;
-  }
-
-  /* Steps card */
-  .steps-card {
-    width: 100%;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 18px;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    animation: fadeUp 0.6s ease 0.2s both;
-  }
-
-  .steps-title {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #8ab898;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .step-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.9rem;
-  }
-
-  .step-num {
-    width: 28px;
-    height: 28px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: rgba(61, 202, 106, 0.12);
-    border: 1px solid rgba(61, 202, 106, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: #3dca6a;
-  }
-
-  .step-text {
-    font-size: 0.88rem;
-    color: #c2ddc8;
-    line-height: 1.55;
-    padding-top: 3px;
-  }
-
-  .step-text strong {
-    color: #e8f5eb;
-    font-weight: 600;
-  }
-
-  /* CTA button */
-  .cta-btn {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 1rem 1.2rem;
-    background: linear-gradient(135deg, #1d5928 0%, #153d1c 100%);
-    border: 1px solid rgba(61, 202, 106, 0.35);
-    border-radius: 14px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #dff0e3;
-    cursor: pointer;
-    text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-    animation: fadeUp 0.6s ease 0.3s both;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cta-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
-    pointer-events: none;
-  }
-
-  .cta-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(61, 202, 106, 0.15);
-    border-color: rgba(61, 202, 106, 0.5);
-  }
-
-  .cta-arrow {
-    transition: transform 0.2s;
-  }
-
-  .cta-btn:hover .cta-arrow {
-    transform: translate(3px, -2px);
-  }
-
-  /* Badges row */
-  .badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    justify-content: center;
-    animation: fadeUp 0.6s ease 0.35s both;
-  }
-
-  .badge {
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: #3dca6a;
-    background: rgba(61, 202, 106, 0.1);
-    border: 1px solid rgba(61, 202, 106, 0.22);
-    border-radius: 100px;
-    padding: 0.22rem 0.7rem;
-  }
-
-  /* Footer */
-  .footer {
-    font-size: 0.76rem;
-    color: #4dae65;
-    animation: fadeUp 0.6s ease 0.4s both;
-  }
-
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(16px)
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0)
-    }
-  }
-
-  @media(max-width:480px) {
-    .page-wrap {
-      padding: 1.5rem 1rem 3rem
-    }
-
-    .main-card {
-      padding: 2rem 1.25rem 1.5rem
-    }
-
-    .main-title {
-      font-size: 1.55rem
-    }
-
-    .info-grid {
-      grid-template-columns: 1fr
-    }
-  }
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+#ppdb-root{font-family:'Plus Jakarta Sans',sans-serif;background:#0a1a0d;min-height:100vh;display:flex;justify-content:center;padding:1.5rem 1rem 3rem;position:relative;overflow:hidden}
+canvas#cc{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999}
+.orb{position:absolute;border-radius:50%;pointer-events:none}
+.o1{width:300px;height:300px;background:radial-gradient(circle,#1a5c2a 0%,transparent 70%);top:-100px;right:-60px;opacity:.45;filter:blur(60px)}
+.o2{width:260px;height:260px;background:radial-gradient(circle,#0d3d1a 0%,transparent 70%);bottom:-60px;left:-50px;opacity:.5;filter:blur(50px)}
+.wrap{position:relative;z-index:1;width:100%;max-width:380px;display:flex;flex-direction:column;align-items:center;gap:1rem}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(61,202,106,.12);border:1px solid rgba(61,202,106,.3);border-radius:100px;padding:.3rem .9rem;font-size:.7rem;font-weight:700;color:#3dca6a;letter-spacing:.05em}
+.bdot{width:6px;height:6px;border-radius:50%;background:#3dca6a;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.card{width:100%;background:linear-gradient(160deg,#0f2e14 0%,#0a1a0d 100%);border:1px solid rgba(61,202,106,.25);border-radius:20px;padding:2rem 1.25rem 1.5rem;display:flex;flex-direction:column;align-items:center;gap:1rem;text-align:center;position:relative;overflow:hidden;animation:fadeUp .5s ease both}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#3dca6a 40%,#5ee87e 60%,transparent)}
+.aring{padding:3px;border-radius:50%;background:linear-gradient(135deg,#3dca6a,#1a7a3a,#0f4d22)}
+.avatar{width:80px;height:80px;border-radius:50%;background:#1a3d20;border:3px solid #0a1a0d;display:flex;align-items:center;justify-content:center;font-size:2rem}
+.aburst{position:absolute;top:-1px;right:-1px;width:28px;height:28px;background:linear-gradient(135deg,#3dca6a,#2aae56);border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #0a1a0d;font-size:.8rem}
+.awrap{position:relative}
+.clabel{font-size:.73rem;font-weight:700;color:#3dca6a;letter-spacing:.07em;text-transform:uppercase}
+h1{font-size:1.65rem;font-weight:800;color:#e8f5eb;letter-spacing:-.03em;line-height:1.15;margin:0}
+h1 span{color:#3dca6a}
+.sub{font-size:.875rem;color:#8ab898;line-height:1.65;max-width:300px;margin:0}
+.divider{width:48px;height:2px;background:linear-gradient(90deg,transparent,#3dca6a,transparent);border-radius:2px}
+.igrid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;width:100%}
+.iitem{background:rgba(61,202,106,.06);border:1px solid rgba(61,202,106,.15);border-radius:12px;padding:.75rem .9rem;text-align:left}
+.ilabel{font-size:.65rem;font-weight:700;color:#4dae65;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.ival{font-size:.82rem;font-weight:700;color:#dff0e3}
+.scard{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.25rem;display:flex;flex-direction:column;gap:.85rem;animation:fadeUp .5s ease .1s both}
+.stitle{font-size:.72rem;font-weight:700;color:#8ab898;letter-spacing:.05em;text-transform:uppercase}
+.srow{display:flex;align-items:flex-start;gap:.75rem}
+.snum{width:26px;height:26px;flex-shrink:0;border-radius:50%;background:rgba(61,202,106,.12);border:1px solid rgba(61,202,106,.3);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:#3dca6a}
+.stext{font-size:.82rem;color:#c2ddc8;line-height:1.55;padding-top:3px}
+.stext strong{color:#e8f5eb;font-weight:600}
+.btn{width:100%;display:flex;align-items:center;justify-content:center;gap:7px;padding:.875rem 1rem;background:linear-gradient(135deg,#1d5928 0%,#153d1c 100%);border:1px solid rgba(61,202,106,.35);border-radius:12px;font-size:.875rem;font-weight:700;color:#dff0e3;cursor:pointer;text-decoration:none;transition:transform .18s,box-shadow .18s;animation:fadeUp .5s ease .2s both;position:relative;overflow:hidden}
+.btn2{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.09)}
+.btn:active{transform:scale(.97)}
+.arr{transition:transform .18s}
+.badges{display:flex;flex-wrap:wrap;gap:.35rem;justify-content:center;animation:fadeUp .5s ease .25s both}
+.badge{font-size:.66rem;font-weight:700;color:#3dca6a;background:rgba(61,202,106,.1);border:1px solid rgba(61,202,106,.22);border-radius:100px;padding:.2rem .65rem}
+.foot{font-size:.7rem;color:#4dae65;animation:fadeUp .5s ease .3s both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 </style>
 
-<div class="page-wrap">
-  <canvas id="confetti-canvas"></canvas>
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
-
-  <div class="container">
-
-    <div class="hero-badge">
-      <span class="badge-dot"></span>
-      PENERIMAAN PESERTA DIDIK BARU 2026/2027
-    </div>
-
-    <!-- Main card -->
-    <div class="main-card">
-      <div class="avatar-wrap">
-        <div class="avatar-ring">
-          <div class="avatar">🎓</div>
-        </div>
-        <div class="check-burst">✓</div>
+<div id="ppdb-root">
+  <canvas id="cc"></canvas>
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="wrap">
+    <div class="hero-badge"><span class="bdot"></span>PPDB 2026 / 2027</div>
+    <div class="card">
+      <div class="awrap">
+        <div class="aring"><div class="avatar">🎓</div></div>
+        <div class="aburst">✓</div>
       </div>
-
-      <div class="congrats-label">✦ Selamat ✦</div>
-      <h1 class="main-title">Kamu <span>Diterima!</span></h1>
-      <p class="main-sub">
-        Selamat bergabung di keluarga besar <strong style="color:#dff0e3">SMK Tamansiswa Jetis – Yogyakarta</strong>.
-        Perjalanan luar biasamu dimulai dari sini.
-      </p>
-
+      <div class="clabel">✦ Selamat ✦</div>
+      <h1>Kamu <span>Diterima!</span></h1>
+      <p class="sub">Selamat bergabung di keluarga besar <strong style="color:#dff0e3">SMK Tamansiswa Jetis – Yogyakarta</strong>. Perjalanan luar biasamu dimulai dari sini.</p>
       <div class="divider"></div>
-
-      <div class="info-grid">
-        <div class="info-item">
-          <span class="info-label">Status</span>
-          <span class="info-value">✅ Diterima</span>
-        </div>
-        <div class="info-item">
-          <span class="info-label">Tahun Ajaran</span>
-          <span class="info-value">2026 / 2027</span>
-        </div>
-        <div class="info-item">
-          <span class="info-label">Sekolah</span>
-          <span class="info-value">SMK Tamansiswa Jetis</span>
-        </div>
-        <div class="info-item">
-          <span class="info-label">Kota</span>
-          <span class="info-value">Yogyakarta</span>
-        </div>
+      <div class="igrid">
+        <div class="iitem"><div class="ilabel">Status</div><div class="ival">✅ Diterima</div></div>
+        <div class="iitem"><div class="ilabel">Tahun Ajaran</div><div class="ival">2026 / 2027</div></div>
+        <div class="iitem"><div class="ilabel">Sekolah</div><div class="ival">SMK Tamansiswa Jetis</div></div>
+        <div class="iitem"><div class="ilabel">Kota</div><div class="ival">Yogyakarta</div></div>
       </div>
     </div>
-
-    <!-- Steps -->
-    <div class="steps-card">
-      <div class="steps-title">📋 Langkah Selanjutnya</div>
-      <div class="step-row">
-        <div class="step-num">1</div>
-        <div class="step-text"><strong>Lengkapi berkas administrasi</strong> — siapkan dokumen pendaftaran yang
-          dibutuhkan sesuai informasi dari sekolah.</div>
-      </div>
-      <div class="step-row">
-        <div class="step-num">2</div>
-        <div class="step-text"><strong>Daftar ulang</strong> — lakukan daftar ulang pada tanggal yang telah ditentukan
-          agar statusmu terkonfirmasi.</div>
-      </div>
-      <div class="step-row">
-        <div class="step-num">3</div>
-        <div class="step-text"><strong>Ikuti orientasi</strong> — hadiri Masa Pengenalan Lingkungan Sekolah (MPLS) untuk
-          mengenal guru dan teman baru.</div>
-      </div>
+    <div class="scard">
+      <div class="stitle">📋 Langkah Selanjutnya</div>
+      <div class="srow"><div class="snum">1</div><div class="stext"><strong>Lengkapi berkas administrasi</strong> — siapkan dokumen pendaftaran yang dibutuhkan sesuai informasi dari sekolah.</div></div>
+      <div class="srow"><div class="snum">2</div><div class="stext"><strong>Daftar ulang</strong> — lakukan daftar ulang pada tanggal yang telah ditentukan agar statusmu terkonfirmasi.</div></div>
+      <div class="srow"><div class="snum">3</div><div class="stext"><strong>Ikuti orientasi</strong> — hadiri Masa Pengenalan Lingkungan Sekolah (MPLS) untuk mengenal guru dan teman baru.</div></div>
     </div>
-
-    <!-- CTA -->
-    <a href="https://www.instagram.com/smktamsisjetis_yk/" target="_blank" rel="noopener" class="cta-btn">
-      📸 Ikuti kami di Instagram
-      <span class="cta-arrow">↗</span>
-    </a>
-    <a href="https://wa.me/6288232128784" target="_blank" rel="noopener" class="cta-btn"
-      style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.07);">
-      💬 Hubungi WhatsApp Sekolah
-      <span class="cta-arrow">↗</span>
-    </a>
-
-    <!-- Badges -->
+    <a href="https://www.instagram.com/smktamsisjetis_yk/" target="_blank" rel="noopener" class="btn">📸 Ikuti kami di Instagram <span class="arr">↗</span></a>
+    <a href="https://wa.me/6288232128784" target="_blank" rel="noopener" class="btn btn2">💬 Hubungi WhatsApp Sekolah <span class="arr">↗</span></a>
     <div class="badges">
       <span class="badge">SMK Pusat Keunggulan</span>
       <span class="badge">Teaching Factory</span>
       <span class="badge">Tamansiswa</span>
     </div>
-
-    <div class="footer">Copyright RPL Team · 2025</div>
+    <div class="foot">Copyright RPL Team · 2025</div>
   </div>
 </div>
 
 <script>
-  (function () {
-    const canvas = document.getElementById('confetti-canvas');
-    const ctx = canvas.getContext('2d');
-    let W, H, pieces = [];
-    const colors = ['#3dca6a', '#5ee87e', '#1a7a3a', '#a3f0b8', '#ffffff', '#ffb300', '#ff6b6b'];
-
-    function resize() {
-      W = canvas.width = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    function createPiece() {
-      return {
-        x: Math.random() * W,
-        y: -12,
-        w: Math.random() * 8 + 5,
-        h: Math.random() * 5 + 3,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        rot: Math.random() * Math.PI * 2,
-        rotSpeed: (Math.random() - 0.5) * 0.12,
-        vx: (Math.random() - 0.5) * 2,
-        vy: Math.random() * 2.5 + 1.2,
-        alpha: 1
-      };
-    }
-
-    let frame = 0;
-    function launch() {
-      if (frame < 180) {
-        for (let i = 0; i < 3; i++) pieces.push(createPiece());
-      }
-      frame++;
-
-      ctx.clearRect(0, 0, W, H);
-      pieces = pieces.filter(p => p.alpha > 0.01);
-      pieces.forEach(p => {
-        p.x += p.vx;
-        p.y += p.vy;
-        p.rot += p.rotSpeed;
-        if (p.y > H * 0.8) p.alpha -= 0.025;
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.rot);
-        ctx.fillStyle = p.color;
-        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-        ctx.restore();
-      });
-
-      if (frame < 220 || pieces.length > 0) {
-        requestAnimationFrame(launch);
-      }
-    }
-    setTimeout(launch, 300);
-  })();
+(function(){
+  const canvas=document.getElementById('cc');
+  const ctx=canvas.getContext('2d');
+  let W,H,pieces=[];
+  const colors=['#3dca6a','#5ee87e','#1a7a3a','#a3f0b8','#ffffff','#ffb300'];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  function mk(){return{x:Math.random()*W,y:-12,w:Math.random()*7+4,h:Math.random()*4+3,color:colors[Math.floor(Math.random()*colors.length)],rot:Math.random()*Math.PI*2,rs:(Math.random()-.5)*.11,vx:(Math.random()-.5)*1.8,vy:Math.random()*2.2+1,alpha:1};}
+  let frame=0;
+  function loop(){
+    if(frame<160)for(let i=0;i<3;i++)pieces.push(mk());
+    frame++;
+    ctx.clearRect(0,0,W,H);
+    pieces=pieces.filter(p=>p.alpha>.01);
+    pieces.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.rot+=p.rs;if(p.y>H*.78)p.alpha-=.022;ctx.save();ctx.globalAlpha=p.alpha;ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.fillStyle=p.color;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();});
+    if(frame<200||pieces.length>0)requestAnimationFrame(loop);
+  }
+  setTimeout(loop,300);
+})();
 </script>
