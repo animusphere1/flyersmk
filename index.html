@@ -1,103 +1,272 @@
-
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Selamat! Kamu Diterima – SMK Tamansiswa Jetis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-#ppdb-root{font-family:'Plus Jakarta Sans',sans-serif;background:#0a1a0d;min-height:100vh;display:flex;justify-content:center;padding:1.5rem 1rem 3rem;position:relative;overflow:hidden}
-canvas#cc{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999}
-.orb{position:absolute;border-radius:50%;pointer-events:none}
-.o1{width:300px;height:300px;background:radial-gradient(circle,#1a5c2a 0%,transparent 70%);top:-100px;right:-60px;opacity:.45;filter:blur(60px)}
-.o2{width:260px;height:260px;background:radial-gradient(circle,#0d3d1a 0%,transparent 70%);bottom:-60px;left:-50px;opacity:.5;filter:blur(50px)}
-.wrap{position:relative;z-index:1;width:100%;max-width:380px;display:flex;flex-direction:column;align-items:center;gap:1rem}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(61,202,106,.12);border:1px solid rgba(61,202,106,.3);border-radius:100px;padding:.3rem .9rem;font-size:.7rem;font-weight:700;color:#3dca6a;letter-spacing:.05em}
-.bdot{width:6px;height:6px;border-radius:50%;background:#3dca6a;animation:blink 1.5s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
-.card{width:100%;background:linear-gradient(160deg,#0f2e14 0%,#0a1a0d 100%);border:1px solid rgba(61,202,106,.25);border-radius:20px;padding:2rem 1.25rem 1.5rem;display:flex;flex-direction:column;align-items:center;gap:1rem;text-align:center;position:relative;overflow:hidden;animation:fadeUp .5s ease both}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#3dca6a 40%,#5ee87e 60%,transparent)}
-.aring{padding:3px;border-radius:50%;background:linear-gradient(135deg,#3dca6a,#1a7a3a,#0f4d22)}
-.avatar{width:80px;height:80px;border-radius:50%;background:#1a3d20;border:3px solid #0a1a0d;display:flex;align-items:center;justify-content:center;font-size:2rem}
-.aburst{position:absolute;top:-1px;right:-1px;width:28px;height:28px;background:linear-gradient(135deg,#3dca6a,#2aae56);border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #0a1a0d;font-size:.8rem}
-.awrap{position:relative}
-.clabel{font-size:.73rem;font-weight:700;color:#3dca6a;letter-spacing:.07em;text-transform:uppercase}
-h1{font-size:1.65rem;font-weight:800;color:#e8f5eb;letter-spacing:-.03em;line-height:1.15;margin:0}
-h1 span{color:#3dca6a}
-.sub{font-size:.875rem;color:#8ab898;line-height:1.65;max-width:300px;margin:0}
-.divider{width:48px;height:2px;background:linear-gradient(90deg,transparent,#3dca6a,transparent);border-radius:2px}
-.igrid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;width:100%}
-.iitem{background:rgba(61,202,106,.06);border:1px solid rgba(61,202,106,.15);border-radius:12px;padding:.75rem .9rem;text-align:left}
-.ilabel{font-size:.65rem;font-weight:700;color:#4dae65;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
-.ival{font-size:.82rem;font-weight:700;color:#dff0e3}
-.scard{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.25rem;display:flex;flex-direction:column;gap:.85rem;animation:fadeUp .5s ease .1s both}
-.stitle{font-size:.72rem;font-weight:700;color:#8ab898;letter-spacing:.05em;text-transform:uppercase}
-.srow{display:flex;align-items:flex-start;gap:.75rem}
-.snum{width:26px;height:26px;flex-shrink:0;border-radius:50%;background:rgba(61,202,106,.12);border:1px solid rgba(61,202,106,.3);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:#3dca6a}
-.stext{font-size:.82rem;color:#c2ddc8;line-height:1.55;padding-top:3px}
-.stext strong{color:#e8f5eb;font-weight:600}
-.btn{width:100%;display:flex;align-items:center;justify-content:center;gap:7px;padding:.875rem 1rem;background:linear-gradient(135deg,#1d5928 0%,#153d1c 100%);border:1px solid rgba(61,202,106,.35);border-radius:12px;font-size:.875rem;font-weight:700;color:#dff0e3;cursor:pointer;text-decoration:none;transition:transform .18s,box-shadow .18s;animation:fadeUp .5s ease .2s both;position:relative;overflow:hidden}
-.btn2{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.09)}
-.btn:active{transform:scale(.97)}
-.arr{transition:transform .18s}
-.badges{display:flex;flex-wrap:wrap;gap:.35rem;justify-content:center;animation:fadeUp .5s ease .25s both}
-.badge{font-size:.66rem;font-weight:700;color:#3dca6a;background:rgba(61,202,106,.1);border:1px solid rgba(61,202,106,.22);border-radius:100px;padding:.2rem .65rem}
-.foot{font-size:.7rem;color:#4dae65;animation:fadeUp .5s ease .3s both}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-</style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; min-height: 100vh; overflow-x: hidden; }
 
-<div id="ppdb-root">
-  <canvas id="cc"></canvas>
-  <div class="orb o1"></div>
-  <div class="orb o2"></div>
-  <div class="wrap">
-    <div class="hero-badge"><span class="bdot"></span>PPDB 2026 / 2027</div>
-    <div class="card">
-      <div class="awrap">
-        <div class="aring"><div class="avatar">🎓</div></div>
-        <div class="aburst">✓</div>
-      </div>
-      <div class="clabel">✦ Selamat ✦</div>
-      <h1>Kamu <span>Diterima!</span></h1>
-      <p class="sub">Selamat bergabung di keluarga besar <strong style="color:#dff0e3">SMK Tamansiswa Jetis – Yogyakarta</strong>. Perjalanan luar biasamu dimulai dari sini.</p>
-      <div class="divider"></div>
-      <div class="igrid">
-        <div class="iitem"><div class="ilabel">Status</div><div class="ival">✅ Diterima</div></div>
-        <div class="iitem"><div class="ilabel">Tahun Ajaran</div><div class="ival">2026 / 2027</div></div>
-        <div class="iitem"><div class="ilabel">Sekolah</div><div class="ival">SMK Tamansiswa Jetis</div></div>
-        <div class="iitem"><div class="ilabel">Kota</div><div class="ival">Yogyakarta</div></div>
-      </div>
-    </div>
-    <div class="scard">
-      <div class="stitle">📋 Langkah Selanjutnya</div>
-      <div class="srow"><div class="snum">1</div><div class="stext"><strong>Lengkapi berkas administrasi</strong> — siapkan dokumen pendaftaran yang dibutuhkan sesuai informasi dari sekolah.</div></div>
-      <div class="srow"><div class="snum">2</div><div class="stext"><strong>Daftar ulang</strong> — lakukan daftar ulang pada tanggal yang telah ditentukan agar statusmu terkonfirmasi.</div></div>
-      <div class="srow"><div class="snum">3</div><div class="stext"><strong>Ikuti orientasi</strong> — hadiri Masa Pengenalan Lingkungan Sekolah (MPLS) untuk mengenal guru dan teman baru.</div></div>
-    </div>
-    <a href="https://www.instagram.com/smktamsisjetis_yk/" target="_blank" rel="noopener" class="btn">📸 Ikuti kami di Instagram <span class="arr">↗</span></a>
-    <a href="https://wa.me/6288232128784" target="_blank" rel="noopener" class="btn btn2">💬 Hubungi WhatsApp Sekolah <span class="arr">↗</span></a>
-    <div class="badges">
-      <span class="badge">SMK Pusat Keunggulan</span>
-      <span class="badge">Teaching Factory</span>
-      <span class="badge">Tamansiswa</span>
-    </div>
-    <div class="foot">Copyright RPL Team · 2025</div>
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #0a1a0d;
+    color: #e8f5eb;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2.5rem 1rem 4rem;
+    position: relative;
+  }
+
+  canvas#confetti {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  .orb { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; }
+  .o1 { width: 400px; height: 400px; background: radial-gradient(circle, #1a5c2a 0%, transparent 70%); top: -120px; right: -80px; opacity: .45; filter: blur(64px); }
+  .o2 { width: 320px; height: 320px; background: radial-gradient(circle, #0d3d1a 0%, transparent 70%); bottom: -80px; left: -60px; opacity: .5; filter: blur(54px); }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* Hero badge */
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(61,202,106,.12);
+    border: 1px solid rgba(61,202,106,.3);
+    border-radius: 100px;
+    padding: .3rem .9rem;
+    font-size: .72rem;
+    font-weight: 700;
+    color: #3dca6a;
+    letter-spacing: .06em;
+    animation: fadeUp .5s ease both;
+  }
+  .bdot { width: 6px; height: 6px; border-radius: 50%; background: #3dca6a; animation: blink 1.5s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+  /* Main card */
+  .card {
+    width: 100%;
+    background: linear-gradient(160deg, #0f2e14 0%, #0a1a0d 100%);
+    border: 1px solid rgba(61,202,106,.25);
+    border-radius: 22px;
+    padding: 2rem 1.25rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .9rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp .55s ease .05s both;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #3dca6a 40%, #5ee87e 60%, transparent);
+  }
+
+  .aring { padding: 3px; border-radius: 50%; background: linear-gradient(135deg, #3dca6a, #1a7a3a, #0f4d22); }
+  .avatar { width: 80px; height: 80px; border-radius: 50%; background: #1a3d20; border: 3px solid #0a1a0d; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+  .awrap { position: relative; }
+  .aburst { position: absolute; top: -1px; right: -1px; width: 26px; height: 26px; background: linear-gradient(135deg, #3dca6a, #2aae56); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #0a1a0d; font-size: .78rem; }
+
+  .clabel { font-size: .7rem; font-weight: 700; color: #3dca6a; letter-spacing: .08em; text-transform: uppercase; }
+  h1 { font-size: clamp(1.5rem, 5vw, 1.9rem); font-weight: 800; color: #e8f5eb; letter-spacing: -.03em; line-height: 1.15; }
+  h1 span { color: #3dca6a; }
+  .sub { font-size: .875rem; color: #8ab898; line-height: 1.65; max-width: 300px; }
+  .divider { width: 48px; height: 2px; background: linear-gradient(90deg, transparent, #3dca6a, transparent); border-radius: 2px; }
+
+  .igrid { display: grid; grid-template-columns: 1fr 1fr; gap: .55rem; width: 100%; }
+  .iitem { background: rgba(61,202,106,.06); border: 1px solid rgba(61,202,106,.15); border-radius: 12px; padding: .7rem .85rem; text-align: left; }
+  .ilabel { font-size: .62rem; font-weight: 700; color: #4dae65; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px; }
+  .ival { font-size: .82rem; font-weight: 700; color: #dff0e3; }
+
+  /* Steps card */
+  .scard {
+    width: 100%;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 16px;
+    padding: 1.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    animation: fadeUp .55s ease .1s both;
+  }
+  .stitle { font-size: .68rem; font-weight: 700; color: #8ab898; letter-spacing: .06em; text-transform: uppercase; }
+  .srow { display: flex; align-items: flex-start; gap: .7rem; }
+  .snum { width: 24px; height: 24px; flex-shrink: 0; border-radius: 50%; background: rgba(61,202,106,.12); border: 1px solid rgba(61,202,106,.3); display: flex; align-items: center; justify-content: center; font-size: .68rem; font-weight: 700; color: #3dca6a; }
+  .stext { font-size: .82rem; color: #c2ddc8; line-height: 1.55; padding-top: 2px; }
+  .stext strong { color: #e8f5eb; font-weight: 700; }
+
+  /* Buttons */
+  .btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: .9rem 1rem;
+    background: linear-gradient(135deg, #1d5928, #153d1c);
+    border: 1px solid rgba(61,202,106,.35);
+    border-radius: 13px;
+    font-family: inherit;
+    font-size: .875rem;
+    font-weight: 700;
+    color: #dff0e3;
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    animation: fadeUp .55s ease .15s both;
+    transition: opacity .15s;
+  }
+  .btn:active { opacity: .8; }
+  .btn2 { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.09); animation-delay: .2s; }
+
+  .badges { display: flex; flex-wrap: wrap; gap: .35rem; justify-content: center; animation: fadeUp .55s ease .25s both; }
+  .badge { font-size: .65rem; font-weight: 700; color: #3dca6a; background: rgba(61,202,106,.1); border: 1px solid rgba(61,202,106,.22); border-radius: 100px; padding: .2rem .65rem; }
+
+  .foot { font-size: .68rem; color: #4dae65; animation: fadeUp .55s ease .3s both; padding-bottom: .5rem; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 380px) {
+    body { padding: 1.5rem .85rem 3rem; }
+    .card { padding: 1.75rem 1rem 1.5rem; }
+    .igrid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+<div class="orb o1"></div>
+<div class="orb o2"></div>
+
+<div class="wrap">
+  <div class="hero-badge">
+    <span class="bdot"></span>
+    PENERIMAAN PESERTA DIDIK BARU 2026/2027
   </div>
+
+  <div class="card">
+    <div class="awrap">
+      <div class="aring"><div class="avatar">🎓</div></div>
+      <div class="aburst">✓</div>
+    </div>
+    <div class="clabel">✦ Selamat ✦</div>
+    <h1>Kamu <span>Diterima!</span></h1>
+    <p class="sub">Selamat bergabung di keluarga besar <strong style="color:#dff0e3">SMK Tamansiswa Jetis – Yogyakarta</strong>. Perjalanan luar biasamu dimulai dari sini.</p>
+    <div class="divider"></div>
+    <div class="igrid">
+      <div class="iitem"><div class="ilabel">Status</div><div class="ival">✅ Diterima</div></div>
+      <div class="iitem"><div class="ilabel">Tahun Ajaran</div><div class="ival">2026 / 2027</div></div>
+      <div class="iitem"><div class="ilabel">Sekolah</div><div class="ival">SMK Tamansiswa Jetis</div></div>
+      <div class="iitem"><div class="ilabel">Kota</div><div class="ival">Yogyakarta</div></div>
+    </div>
+  </div>
+
+  <div class="scard">
+    <div class="stitle">📋 Langkah Selanjutnya</div>
+    <div class="srow">
+      <div class="snum">1</div>
+      <div class="stext"><strong>Lengkapi berkas administrasi</strong> — siapkan dokumen pendaftaran yang dibutuhkan sesuai informasi dari sekolah.</div>
+    </div>
+    <div class="srow">
+      <div class="snum">2</div>
+      <div class="stext"><strong>Daftar ulang</strong> — lakukan daftar ulang pada tanggal yang telah ditentukan agar statusmu terkonfirmasi.</div>
+    </div>
+    <div class="srow">
+      <div class="snum">3</div>
+      <div class="stext"><strong>Ikuti orientasi</strong> — hadiri Masa Pengenalan Lingkungan Sekolah (MPLS) untuk mengenal guru dan teman baru.</div>
+    </div>
+  </div>
+
+  <a href="https://www.instagram.com/smktamsisjetis_yk/" target="_blank" rel="noopener" class="btn">
+    📸 Ikuti kami di Instagram ↗
+  </a>
+  <a href="https://wa.me/6288232128784" target="_blank" rel="noopener" class="btn btn2">
+    💬 Hubungi WhatsApp Sekolah ↗
+  </a>
+
+  <div class="badges">
+    <span class="badge">SMK Pusat Keunggulan</span>
+    <span class="badge">Teaching Factory</span>
+    <span class="badge">Tamansiswa</span>
+  </div>
+
+  <div class="foot">Copyright RPL Team · 2025</div>
 </div>
 
 <script>
-(function(){
-  const canvas=document.getElementById('cc');
-  const ctx=canvas.getContext('2d');
-  let W,H,pieces=[];
-  const colors=['#3dca6a','#5ee87e','#1a7a3a','#a3f0b8','#ffffff','#ffb300'];
-  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
-  resize();window.addEventListener('resize',resize);
-  function mk(){return{x:Math.random()*W,y:-12,w:Math.random()*7+4,h:Math.random()*4+3,color:colors[Math.floor(Math.random()*colors.length)],rot:Math.random()*Math.PI*2,rs:(Math.random()-.5)*.11,vx:(Math.random()-.5)*1.8,vy:Math.random()*2.2+1,alpha:1};}
-  let frame=0;
-  function loop(){
-    if(frame<160)for(let i=0;i<3;i++)pieces.push(mk());
-    frame++;
-    ctx.clearRect(0,0,W,H);
-    pieces=pieces.filter(p=>p.alpha>.01);
-    pieces.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.rot+=p.rs;if(p.y>H*.78)p.alpha-=.022;ctx.save();ctx.globalAlpha=p.alpha;ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.fillStyle=p.color;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();});
-    if(frame<200||pieces.length>0)requestAnimationFrame(loop);
+(function () {
+  const canvas = document.getElementById('confetti');
+  const ctx = canvas.getContext('2d');
+  let W, H, pieces = [];
+  const colors = ['#3dca6a', '#5ee87e', '#1a7a3a', '#a3f0b8', '#ffffff', '#ffb300', '#ff6b6b'];
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
   }
-  setTimeout(loop,300);
+  resize();
+  window.addEventListener('resize', resize);
+
+  function mk() {
+    return {
+      x: Math.random() * W, y: -12,
+      w: Math.random() * 8 + 5, h: Math.random() * 5 + 3,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      rot: Math.random() * Math.PI * 2,
+      rs: (Math.random() - .5) * .12,
+      vx: (Math.random() - .5) * 2,
+      vy: Math.random() * 2.5 + 1.2,
+      alpha: 1
+    };
+  }
+
+  let frame = 0;
+  function loop() {
+    if (frame < 180) for (let i = 0; i < 3; i++) pieces.push(mk());
+    frame++;
+    ctx.clearRect(0, 0, W, H);
+    pieces = pieces.filter(p => p.alpha > .01);
+    pieces.forEach(p => {
+      p.x += p.vx; p.y += p.vy; p.rot += p.rs;
+      if (p.y > H * .8) p.alpha -= .022;
+      ctx.save();
+      ctx.globalAlpha = p.alpha;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+    });
+    if (frame < 220 || pieces.length > 0) requestAnimationFrame(loop);
+  }
+  setTimeout(loop, 300);
 })();
 </script>
+</body>
+</html>
